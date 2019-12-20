@@ -74,7 +74,7 @@ void initHandlersIfNeed() {
     }
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:body];
     [handler handleJsFromWebView:self.webView info:dic];
-    DLog(@"Action:%@",action);
+    NSLog(@"Action:%@",action);
     
 
 }

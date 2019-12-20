@@ -19,5 +19,5 @@ void invokeCallback(WKWebView *webView, NSDictionary *fromJs, NSMutableDictionar
     NSString *resultString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSString *js = [NSString stringWithFormat:@"%@(%@)", callback, resultString];
     [webView evaluateJavaScript:js completionHandler:nil];
-    DLog(@"js---------:%@",js);
+    NSLog(@"js---------:%@",js);
 }

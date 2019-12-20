@@ -23,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshWebView) name:kWS_InteriorNotification_RefrshWebView object:nil];
     [self prepareUI];
     //NSURL *url = [NSURL fileURLWithPath:self.webURL];
     //[self.webView loadRequest:[NSURLRequest requestWithURL:url]];
@@ -54,8 +52,7 @@
 -(void)dealloc{
     if (self.webView) [self.webView stopLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:KWS_CloseWebView object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kWS_InteriorNotification_JumpToAllTapeVC object:nil];
+ 
 }
 
 #pragma mark - Private Method
@@ -89,18 +86,18 @@
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    [MBProgressHUD showLoadWithText:@"" addedTo:self.view isfullScreen:YES];
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    [MBProgressHUD hideHUDForView:self.view animated:NO];
+   
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    [MBProgressHUD hideHUDForView:self.view animated:NO];
+   
 }
 
 #pragma mark -BCBFloatButtonDelegate
@@ -118,7 +115,7 @@
 //关闭sdk
 - (void)coadjutantCloseWebViewWithJsHandlerBlock:(JsHandlerBlockBlock)block info:(NSDictionary *)info{
     [self dismissViewControllerAnimated:YES completion:^{
-        DLog(@"Web关闭成功==");
+        NSLog(@"Web关闭成功==");
         block(@"Web关闭成功");
     }];
 }
@@ -130,7 +127,7 @@
 
 
 - (void)closeWebView {
-    DLog(@"navigationController关闭成功==");
+    NSLog(@"navigationController关闭成功==");
     [self.navigationController popViewControllerAnimated:NO];
 }
 /*
